@@ -1,0 +1,22 @@
+version: '3.2'
+
+services:
+  neneka:
+    image: neneka
+    build: .
+    container_name: neneka
+    volumes:
+      - ./:/app
+    command: gunicorn neneka.app:app -b :8080 --worker-class aiohttp.GunicornWebWorker --reload --access-logfile -
+    ports:
+      - "8080:8080"
+    links:
+      - db
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_HOST: 127.0.0.1
+      POSTGRES_DB: test
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
