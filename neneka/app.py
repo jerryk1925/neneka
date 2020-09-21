@@ -1,12 +1,9 @@
 import aiopg.sa
 
-from sqlalchemy import create_engine, MetaData
 from aiohttp import web
-from sqlalchemy.schema import CreateTable, DropTable
 
 from neneka.routes import init_routes
 from neneka.utils import get_config
-from neneka.db import question, choice
 
 
 def init_config(app: web.Application, argv=None) -> None:
@@ -14,12 +11,10 @@ def init_config(app: web.Application, argv=None) -> None:
 
 
 async def init_database(app: web.Application) -> None:
-    print('----------')
     config = app['config']['postgres']
-    print(config)
     engine = await aiopg.sa.create_engine(**config)
-
     app['db'] = engine
+
 
 async def close_database(app: web.Application) -> None:
     app['db'].close()
