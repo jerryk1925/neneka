@@ -10,13 +10,13 @@ services:
     command: gunicorn neneka.app:app -b :8080 --worker-class aiohttp.GunicornWebWorker --reload --access-logfile -
     ports:
       - "8080:8080"
-    links:
-      - db
-  db:
+    depends_on:
+      - db_neneka
+  db_neneka:
     image: postgres
     restart: always
+    container_name: db_neneka
     environment:
-      POSTGRES_HOST: 127.0.0.1
       POSTGRES_DB: test
       POSTGRES_USER: username
       POSTGRES_PASSWORD: password

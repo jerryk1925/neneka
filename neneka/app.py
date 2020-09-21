@@ -11,12 +11,12 @@ def init_config(app: web.Application, argv=None) -> None:
 
 
 async def init_database(app: web.Application) -> None:
+    print('----------')
     config = app['config']['postgres']
     print(config)
     engine = await aiopg.sa.create_engine(**config)
     print(engine)
     app['db'] = engine
-
 
 async def close_database(app: web.Application) -> None:
     app['db'].close()
