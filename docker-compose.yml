@@ -16,6 +16,8 @@ services:
     image: postgres
     restart: always
     container_name: db_neneka
+    ports:
+      - 5432:5432
     environment:
       POSTGRES_DB: test
       POSTGRES_USER: username
