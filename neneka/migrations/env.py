@@ -1,3 +1,7 @@
+import sys
+
+sys.path = ['', '..'] + sys.path[1:]
+
 from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
@@ -8,7 +12,7 @@ from alembic import context
 from neneka import migrations
 
 # import here you table files for autodetect your tables by the alembic
-import neneka.db  # noqa
+import neneka.db.user  # noqa
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
@@ -21,7 +25,7 @@ fileConfig(config.config_file_name)
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = None
+target_metadata = migrations.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:

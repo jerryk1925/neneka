@@ -1,2 +1,4 @@
 .idea
 neneka/__pycache__
+neneka/migrations/versions
+neneka/__pycache__/**
